@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Videojs Sample</title>
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="//vjs.zencdn.net/6.7/video-js.min.css" rel="stylesheet">
+  <script src="//vjs.zencdn.net/6.7/video.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      var videoJsButtonClass = videojs.getComponent('Button');
+      var videoJsButtonClass_2 = videojs.getComponent('Button');
+      var concreteButtonClass = videojs.extend(videoJsButtonClass, {
+        constructor: function() {
+          videoJsButtonClass.call(this, player);
+          this.addClass('fa');
+          this.addClass('fa-backward');
+        },
+
+        handleClick: function() {
+          player.currentTime(player.currentTime() - 10);
+        }
+      });
+
+
+      var forwardButtonClass = videojs.extend(videoJsButtonClass_2, {
+        constructor: function() {
+          videoJsButtonClass_2.call(this, player);
+          this.addClass('fa');
+          this.addClass('fa-forward');
+        },
+
+        handleClick: function() {
+          player.currentTime(player.currentTime() + 10);
+        }
+      });
+
+      var player = videojs('my-player');
+      var concreteButtonInstance = player.controlBar.addChild(new concreteButtonClass());
+      concreteButtonInstance.addClass("vjs-control-content");
+
+      var forwardButtonInstance = player.controlBar.addChild(new forwardButtonClass());
+      forwardButtonInstance.addClass("vjs-control-content");
+    })
+  </script>
+</head>
+
+<body>
+
+  <video id="my-player" class="video-js" controls preload="none" poster="//vjs.zencdn.net/v/oceans.png">
+    <source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+    </source>
+    <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm">
+    </source>
+    <source src="//vjs.zencdn.net/v/oceans.ogv" type="video/ogg">
+    </source>
+    <track kind='captions' src='https://dotsub.com/media/5d5f008c-b5d5-466f-bb83-2b3cfa997992/c/chi_hans/vtt' srclang='zh' label='Chinese' default />
+    <track kind='captions' src='https://dotsub.com/media/5d5f008c-b5d5-466f-bb83-2b3cfa997992/c/eng/vtt' srclang='en' label='English' />
+    <track kind='captions' src='https://dotsub.com/media/5d5f008c-b5d5-466f-bb83-2b3cfa997992/c/spa/vtt' srclang='es' label='Spanish' />
+    <track kind='captions' src='https://dotsub.com/media/5d5f008c-b5d5-466f-bb83-2b3cfa997992/c/fre_ca/vtt' srclang='fr' label='French' />
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">
+        supports HTML5 video
+      </a>
+    </p>
+  </video>
+</body>
+
+</html>
